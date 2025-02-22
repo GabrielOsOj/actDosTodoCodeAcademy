@@ -1,13 +1,13 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Interface.java to edit this template
- */
-
 package com.gbInc.actividadDosTDC.service;
 
-/**
- * @author cuent
- */
-public interface ImascotaService {
+import com.gbInc.actividadDosTDC.model.Mascota;
+import java.util.List;
 
+public interface ImascotaService {
+	
+	public boolean crearMascota(Mascota mascota);
+	public List<Mascota> leerMascotas();
+	public boolean actualizarMascota(Mascota mascota);
+	public boolean eliminarMascota(Long idMascota);
+	
 }
