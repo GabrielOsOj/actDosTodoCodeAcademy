@@ -23,14 +23,16 @@ public class Mascota {
 	@JoinColumn(referencedColumnName = "idDueño")
 	private Dueño dueño;
 
-	public Mascota(Long idMascota, String nombre, String especie, String raza, String color) {
+	public Mascota(Long idMascota, String nombre, String especie, String raza, String color, Dueño dueño) {
 		this.idMascota = idMascota;
 		this.nombre = nombre;
 		this.especie = especie;
 		this.raza = raza;
 		this.color = color;
+		this.dueño = dueño;
 	}
 
+	
 	public Mascota() {
 	}
 
@@ -74,5 +76,14 @@ public class Mascota {
 		this.color = color;
 	}
 
+	public Dueño getDueño() {
+		return dueño;
+	}
+
+	public void setDueño(Dueño dueño) {
+		this.dueño = dueño;
+	}
+	
+	
 	
 }
