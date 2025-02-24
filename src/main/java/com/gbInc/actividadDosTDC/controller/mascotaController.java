@@ -1,5 +1,6 @@
 package com.gbInc.actividadDosTDC.controller;
 
+import com.gbInc.actividadDosTDC.dto.DTOdueñoMascota;
 import com.gbInc.actividadDosTDC.service.ImascotaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -86,6 +87,22 @@ public class mascotaController {
 			return new ResponseEntity<>(mascotas,HttpStatus.OK);
 		}
 		
+	}
+	
+	
+	@GetMapping("/datosMascotaYdueño")
+	public ResponseEntity<DTOdueñoMascota> obtenerDatosMascotaDueño(
+			@RequestParam Long id
+	){
+	
+		DTOdueñoMascota dm = 
+				this.mascotaSv.obtenerDueñoYmascota(id);
+		
+		if(dm == null){
+			return new ResponseEntity<>(null,HttpStatus.NOT_FOUND);
+		}else{
+			return new ResponseEntity<>(dm,HttpStatus.OK);
+		}
 	}
 	
 }

@@ -1,5 +1,6 @@
 package com.gbInc.actividadDosTDC.service;
 
+import com.gbInc.actividadDosTDC.dto.DTOdueñoMascota;
 import com.gbInc.actividadDosTDC.model.Mascota;
 import com.gbInc.actividadDosTDC.model.Dueño;
 
@@ -39,12 +40,20 @@ public class mascotaService implements ImascotaService {
 	@Override
 	public boolean actualizarMascota(Mascota mascota) {
 
-		if (mascota.getIdMascota() != null && this.mascotaRepo.existsById(mascota.getIdMascota())) {
+		if(mascota.getIdMascota() != null){
+			System.out.println("Id no puede ser null");
+			return false;
+		
+		}
+		
+		if (this.mascotaRepo.existsById(mascota.getIdMascota())) {
 
 			this.mascotaRepo.save(mascota);
 			return true;
 
 		}
+		
+		System.out.println("Mascota no existe en db");
 		return false;
 	}
 
@@ -65,9 +74,33 @@ public class mascotaService implements ImascotaService {
 	public List<Mascota> buscarPorEspecieYraza(String especie, String raza) {
 
 		return this.mascotaRepo.findByParams(especie, raza);
-
+		
 	}
-	
+
+	@Override
+	public DTOdueñoMascota obtenerDueñoYmascota(Long id) {
+		
+		if(id == null){
+			return null;
+		}
+		
+		if(!this.mascotaRepo.existsById(id)){
+			return null;
+		}
+		
+		Mascota m = this.mascotaRepo.findById(id).get();
+		Dueño d = m.getDueño();
+		
+		DTOdueñoMascota dm = new DTOdueñoMascota();
+		dm.setNombreMascota(m.getNombre());
+		dm.setEspecie(m.getEspecie());
+		dm.setRaza(m.getRaza());
+		dm.setNombreDueño(d.getNombre());
+		dm.setApellidoDueño(d.getApellido());
+		
+		return dm;
+	}
+
 	/*-------------- Utilidades ---------------*/
 	private Boolean verificarDueño(Dueño d) {
 
