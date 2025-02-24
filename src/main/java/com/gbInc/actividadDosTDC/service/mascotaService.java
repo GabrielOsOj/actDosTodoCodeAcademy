@@ -21,12 +21,11 @@ public class mascotaService implements ImascotaService {
 	@Override
 	public boolean crearMascota(Mascota mascota) {
 
-		System.out.println("entro aca");
 		if (this.verificarDueño(mascota.getDueño())) {
 
 			this.mascotaRepo.save(mascota);
 			return true;
-			
+
 		}
 
 		return false;
@@ -40,7 +39,7 @@ public class mascotaService implements ImascotaService {
 	@Override
 	public boolean actualizarMascota(Mascota mascota) {
 
-		if (mascota.getIdMascota()!=null && this.mascotaRepo.existsById(mascota.getIdMascota())) {
+		if (mascota.getIdMascota() != null && this.mascotaRepo.existsById(mascota.getIdMascota())) {
 
 			this.mascotaRepo.save(mascota);
 			return true;
@@ -52,23 +51,30 @@ public class mascotaService implements ImascotaService {
 	@Override
 	public boolean eliminarMascota(Long idMascota) {
 
-		
-		if (idMascota!=null) {
+		if (idMascota != null) {
 
 			this.mascotaRepo.deleteById(idMascota);
 			return true;
-			
+
 		}
 
 		return false;
 	}
 
+	@Override
+	public List<Mascota> buscarPorEspecieYraza(String especie, String raza) {
+
+		return this.mascotaRepo.findByParams(especie, raza);
+
+	}
+	
+	/*-------------- Utilidades ---------------*/
 	private Boolean verificarDueño(Dueño d) {
-		
-		if (d.getIdDueño()!=null && this.valoresDueñoNulos(d)) {
+
+		if (d.getIdDueño() != null && this.valoresDueñoNulos(d)) {
 			return true;
-		}else
-		if (d.getIdDueño() == null && !this.valoresDueñoNulos(d)) {
+		}
+		else if (d.getIdDueño() == null && !this.valoresDueñoNulos(d)) {
 			this.dueñoRepo.save(d);
 			return true;
 		}

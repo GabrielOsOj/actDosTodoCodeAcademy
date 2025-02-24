@@ -10,4 +10,5 @@ public interface ImascotaService {
 	public boolean actualizarMascota(Mascota mascota);
 	public boolean eliminarMascota(Long idMascota);
 	
+	public List<Mascota> buscarPorEspecieYraza(String especie, String raza);
 }

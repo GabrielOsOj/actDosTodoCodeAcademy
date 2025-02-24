@@ -71,4 +71,21 @@ public class mascotaController {
 		}
 	}
 
+	
+	@GetMapping("/buscarRazaYespecie")
+	public ResponseEntity<List<Mascota>> buscarPorRazaYEspecie(
+			@RequestParam String especie,
+			@RequestParam String raza
+	){
+	
+		List<Mascota> mascotas = this.mascotaSv.buscarPorEspecieYraza(especie, raza);
+		
+		if(mascotas.isEmpty()){
+			return new ResponseEntity<>(null,HttpStatus.NOT_FOUND);
+		}else{
+			return new ResponseEntity<>(mascotas,HttpStatus.OK);
+		}
+		
+	}
+	
 }
