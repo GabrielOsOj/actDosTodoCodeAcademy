@@ -6,31 +6,49 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-
 @Service
-public class dueñoService implements IdueñoService{
+public class dueñoService implements IdueñoService {
 
-	@Autowired	
+	@Autowired
 	IdueñoRepository dueñoRepo;
-	
+
 	@Override
 	public boolean crearDueño(Dueño dueño) {
-		throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+		this.dueñoRepo.save(dueño);
+		return true;
 	}
 
 	@Override
 	public List<Dueño> leerDueños() {
-		throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+
+		return this.dueñoRepo.findAll();
+
 	}
 
 	@Override
 	public boolean editarDueño(Dueño dueño) {
-		throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+
+		if (this.dueñoRepo.existsById(dueño.getIdDueño())) {
+			this.dueñoRepo.save(dueño);
+			return true;
+		}
+		else {
+			return false;
+		}
+
 	}
 
 	@Override
 	public boolean eliminarDueño(Long id) {
-		throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+
+		if (this.dueñoRepo.existsById(id)) {
+			this.dueñoRepo.deleteById(id);
+			return true;
+		}
+		else {
+			return false;
+		}
+
 	}
 
 }
