@@ -6,6 +6,8 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToOne;
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
 
 
 @Entity
@@ -21,6 +23,7 @@ public class Mascota {
 	
 	@OneToOne
 	@JoinColumn(referencedColumnName = "idDueño")
+	@Cascade(CascadeType.ALL)
 	private Dueño dueño;
 
 	public Mascota(Long idMascota, String nombre, String especie, String raza, String color, Dueño dueño) {

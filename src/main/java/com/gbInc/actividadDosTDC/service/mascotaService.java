@@ -39,8 +39,8 @@ public class mascotaService implements ImascotaService {
 
 	@Override
 	public boolean actualizarMascota(Mascota mascota) {
-
-		if(mascota.getIdMascota() != null){
+			
+		if(mascota.getIdMascota() == null){
 			System.out.println("Id no puede ser null");
 			return false;
 		
