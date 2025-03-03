@@ -326,7 +326,7 @@ Finalmente, nos dirigimos al directorio principal y ejecutamos el archivo inicia
 
 si todo funciono correctamente, podemos ir a la ruta:
 
-```bash
+```
 http://localhost:8080/swagger-ui/index.html
 
 ```
@@ -334,16 +334,15 @@ http://localhost:8080/swagger-ui/index.html
 donde podemos probar los distintos endpoints mediante swagger.
 
 ## Probar proyecto mediante docker (nuevo)
+
 Si deseas probar el proyecto y sus endpoints lo puedes hacer mediante docker.
 para probarlo, debes seguir los siguientes pasos:
 
-1. Instalar docker desktop en tu pc.
+1. Instala Docker desktop en tu pc
+2. Crear un archivo de configuracion .yml (o un archivo txt y luego cambiar el .txt a .yml) con el nombre docker-compose.yml
+3. Pega la siguiente configuración dentro del archivo recién creado:
 
-2. crear un archivo de configuracion yml (o un archivo txt y luego cambiar el .txt a .yml) con el nombre docker-compose.yml
-
-3. pegar la siguiente configuracion:
-
-```yml
+```yaml
 services:
   spring_act_tdc2_test_proyectless:
     image: gbdev001/act_spring_tdc2 
@@ -369,20 +368,21 @@ services:
       retries: 10
 
 ```
-4. abrir un terminal en la ubicacion del docker-compose.yml y ejecutar:
+
+1. abrir un terminal en la ubicación del docker-compose.yml que creaste y ejecutar:
 
 ```bash
   docker compose up
 ```
-Este proceso demora un tiempo
 
-5. Una vez que aparezca un mensaje como este:
-
-  Initializing Servlet 'dispatcherServlet'
-
- puedes acceder a:
- ```bash
-http://localhost:8080/swagger-ui/index.html
-
-```
-para probar los endpoints
+1. Este proceso demora un tiempo, una vez desplegado, veras un mensaje en la consola parecido a:
+    
+     Initializing Servlet 'dispatcherServlet’
+    
+    Si todo se ejecuto correctamente, puedes acceder a:
+    
+    ```
+    http://localhost:8080/swagger-ui/index.html
+    ```
+    
+    para probar los endpoints mediante swagger.
