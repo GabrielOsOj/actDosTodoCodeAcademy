@@ -332,3 +332,57 @@ http://localhost:8080/swagger-ui/index.html
 ```
 
 donde podemos probar los distintos endpoints mediante swagger.
+
+## Probar proyecto mediante docker (nuevo)
+Si deseas probar el proyecto y sus endpoints lo puedes hacer mediante docker.
+para probarlo, debes seguir los siguientes pasos:
+
+1. Instalar docker desktop en tu pc.
+
+2. crear un archivo de configuracion yml (o un archivo txt y luego cambiar el .txt a .yml) con el nombre docker-compose.yml
+
+3. pegar la siguiente configuracion:
+
+```yml
+services:
+  spring_act_tdc2_test_proyectless:
+    image: gbdev001/act_spring_tdc2 
+    ports:
+     - "8080:8080"
+    environment:
+      DB_URL: jdbc:mysql://mysql_act_tdc2:3306/dockerDbb
+      DB_PASSWORD: alpha2402
+      DB_USER: root
+    depends_on:
+      mysql_act_tdc2:
+        condition: service_healthy
+  mysql_act_tdc2:
+    image: mysql:9.2.0
+    ports:
+      - "3305:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: alpha2402
+      MYSQL_DATABASE: dockerDbb
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      timeout: 10s
+      retries: 10
+
+```
+4. abrir un terminal en la ubicacion del docker-compose.yml y ejecutar:
+
+```bash
+  docker compose up
+```
+Este proceso demora un tiempo
+
+5. Una vez que aparezca un mensaje como este:
+
+  Initializing Servlet 'dispatcherServlet'
+
+ puedes acceder a:
+ ```bash
+http://localhost:8080/swagger-ui/index.html
+
+```
+para probar los endpoints

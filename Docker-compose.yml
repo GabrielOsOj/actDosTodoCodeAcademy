@@ -1,0 +1,24 @@
+version: '3.9'
+services:
+  spring_act_tdc2:
+    build: .
+    ports:
+     - "8080:8080"
+    environment:
+      DB_URL: jdbc:mysql://mysql_act_tdc2:3306/dockerDbb
+      DB_PASSWORD: alpha2402
+      DB_USER: root
+    depends_on:
+      mysql_act_tdc2:
+        condition: service_healthy
+  mysql_act_tdc2:
+    image: mysql:9.2.0
+    ports:
+      - "3305:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: alpha2402
+      MYSQL_DATABASE: dockerDbb
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      timeout: 10s
+      retries: 10
