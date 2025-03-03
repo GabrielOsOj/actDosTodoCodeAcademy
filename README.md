@@ -369,13 +369,13 @@ services:
 
 ```
 
-1. abrir un terminal en la ubicación del docker-compose.yml que creaste y ejecutar:
+4. abrir un terminal en la ubicación del docker-compose.yml que creaste y ejecutar:
 
 ```bash
   docker compose up
 ```
 
-1. Este proceso demora un tiempo, una vez desplegado, veras un mensaje en la consola parecido a:
+5. Este proceso demora un tiempo, una vez desplegado, veras un mensaje en la consola parecido a:
     
      Initializing Servlet 'dispatcherServlet’
     
